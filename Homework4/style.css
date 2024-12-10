@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inter;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100svh;
+  background-color: rgba(97, 30, 203, 1);
+}
+
+table {
+  border: 1px solid rgba(225, 207, 255, 1);
+  border-radius: 20px;
+  border-collapse: collapse;
+  width: 1000px;
+}
+
+thead {
+  background-color: rgba(245, 245, 245, 1);
+  height: 40px;
+  text-align: left;
+}
+
+tr {
+  height: 40px;
+
+  th {
+    width: 170px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+  }
+}
+
+tbody tr {
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid rgba(225, 207, 255, 1);
+  background-color: white;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 10px;
+}
+
+tbody tr:hover {
+  background-color: rgba(225, 207, 255, 1);
+  font-weight: 600;
+  color: rgba(64, 5, 160, 1);
+}
+
+.Chekcks {
+  width: 50px;
+  padding-left: 20px;
+}
+
+.star {
+  width: 14px;
+  height: 14px;
+
+  fill: rgba(238, 227, 255, 1);
+}
+
+.star.active {
+  fill: rgba(105, 38, 215, 1);
+}
+
+.star:hover {
+  fill: rgba(105, 38, 215, 1);
+  transform: scale(1.1);
+}
