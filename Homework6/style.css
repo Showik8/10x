@@ -1,0 +1,109 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  width: 100vw;
+  height: 100svh;
+}
+
+
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.mainButton {
+  width: 60px;
+  height: 0px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.oval {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.smallOval {
+  background-color: rgb(255, 255, 255);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.wrapper {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 10px;
+  opacity: 0;
+  top: -60px;
+  transform: translateX(-50%) scale(0.8);
+  position: absolute;
+  left: 50%;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  background-color:rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 0.5px solid white;
+}
+.buttons {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+}
+
+.buttons div {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid white;
+}
+.smallButton:first-child {
+  background-color: orange;
+}
+.smallButton:nth-last-child(2) {
+  background-color: rgba(0, 214, 201, 1);
+}
+.smallButton:last-child {
+  background-color: rgba(124, 124, 124, 1);
+}
+
+.container:hover .wrapper {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.container:hover .mainButton {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 0.86px solid white;
+}
+
+.container:hover .oval {
+  border: 1px solid white;
+  width: 50%;
+  height: 50%;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.container:hover .smallOval {
+  border: 1px solid white;
+  width: 50%;
+  height: 50%;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
