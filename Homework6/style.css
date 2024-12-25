@@ -21,7 +21,7 @@ body {
 
 .mainButton {
   width: 60px;
-  height: 0px;
+  height: 60px;
   border-radius: 50%;
   display: inline-flex;
   justify-content: center;
