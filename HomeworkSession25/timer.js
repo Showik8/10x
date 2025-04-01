@@ -16,6 +16,9 @@ function countdownTimerDisplay(seconds, elementId) {
     if (timeLeft < 0) {
       clearInterval(interval);
       timerDisplay.textContent = "Finished!";
+    }else if(correctPass){
+      clearInterval(interval)
+      timerDisplay.textContent = `00:${timeLeft}`
     }
   }, 1000);
 }

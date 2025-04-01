@@ -3,7 +3,11 @@ const reminder = document.getElementById("reminder");
 const btn = document.getElementById("btn");
 
 let ready = false;
-let correctPass = false
+let correctPass = false;
+let audio = null;
+
+const encodedPass = "UGFzc3dvcmQxMSE=";
+const PASSWORD = atob(encodedPass);
 
 function tryPlaySound() {
   play("Sound.mp3");
@@ -14,13 +18,12 @@ function tryPlaySound() {
   countdownTimerDisplay(44, "timer");
 }
 
-const encodedPass = "UGFzc3dvcmQxMSE=";
-const PASSWORD = atob(encodedPass);
 
 let TRY = 3;
 const messageElement = document.getElementById("message");
 const attemptsLeftElement = document.getElementById("attemptsLeft");
 const passwordInput = document.getElementById("passwordInput");
+
 
 function checkPassValid(pwd) {
   const symbols = ["!", "@", "#", "$", "%", "&", "*", "."];
@@ -70,9 +73,11 @@ function checkPass(pwd) {
       if (pwd === PASSWORD) {
         messageElement.textContent = "Correct Password!";
         messageElement.className = "message valid";
-        correctPass = true
+        correctPass = true;
         document.querySelector("button").disabled = true;
         passwordInput.disabled = true;
+        attemptsLeftElement.style.display="none"
+        stop()
       } else {
         messageElement.textContent = `Wrong password.`;
         messageElement.className = "message invalid";
@@ -88,19 +93,27 @@ function checkPass(pwd) {
   }
 }
 
-function play(nm) {
-  let audio = new Audio(nm);
-      audio
-        .play()
-        .then(() => {
-          console.log("Sound playing (attempted onload)");
-        })
-        .catch((error) => {
-          console.error("Playback failed (onload):", error);
-          if (error.name === "NotAllowedError") {
-            console.log("Autoplay blocked on load.");
-          }
-        });
-  
 
+
+function play(nm) {
+   audio = new Audio(nm);
+    audio
+      .play()
+      .then(() => {
+        console.log("Sound playing (attempted onload)");
+      })
+      .catch((error) => {
+        console.error("Playback failed (onload):", error);
+        if (error.name === "NotAllowedError") {
+          console.log("Autoplay blocked on load.");
+        }
+      });
+  
+}
+
+function stop(){
+  console.log("stop")
+    audio.pause();
+    audio.currentTime = 0; 
+    audio = null;
 }
