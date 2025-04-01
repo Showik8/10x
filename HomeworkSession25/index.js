@@ -1,28 +1,26 @@
-
-const cont = document.getElementById("cont")
-const reminder = document.getElementById("reminder")
-const btn = document.getElementById("btn")
+const cont = document.getElementById("cont");
+const reminder = document.getElementById("reminder");
+const btn = document.getElementById("btn");
 
 let ready = false;
-
+let correctPass = false
 
 function tryPlaySound() {
   play("Sound.mp3");
   ready = true;
-  btn.style.display="none"
-  reminder.style.display="none "
+  btn.style.display = "none";
+  reminder.style.display = "none ";
   cont.style.display = "block";
   countdownTimerDisplay(44, "timer");
-
 }
 
+const encodedPass = "UGFzc3dvcmQxMSE=";
+const PASSWORD = atob(encodedPass);
 
-const PASSWORD = "Password01!";
 let TRY = 3;
 const messageElement = document.getElementById("message");
 const attemptsLeftElement = document.getElementById("attemptsLeft");
 const passwordInput = document.getElementById("passwordInput");
-
 
 function checkPassValid(pwd) {
   const symbols = ["!", "@", "#", "$", "%", "&", "*", "."];
@@ -32,7 +30,6 @@ function checkPassValid(pwd) {
   let hasSymbol = false;
   let hasUpperCase = false;
   let numberCount = 0;
-
 
   for (const char of pwd) {
     if (symbols.includes(char)) {
@@ -73,6 +70,7 @@ function checkPass(pwd) {
       if (pwd === PASSWORD) {
         messageElement.textContent = "Correct Password!";
         messageElement.className = "message valid";
+        correctPass = true
         document.querySelector("button").disabled = true;
         passwordInput.disabled = true;
       } else {
@@ -92,18 +90,17 @@ function checkPass(pwd) {
 
 function play(nm) {
   let audio = new Audio(nm);
-  audio
-    .play()
-    .then(() => {
-      console.log("Sound playing (attempted onload)");
-    })
-    .catch((error) => {
-      console.error("Playback failed (onload):", error);
-      if (error.name === "NotAllowedError") {
-        console.log("Autoplay blocked on load.");
-      }
-    });
+      audio
+        .play()
+        .then(() => {
+          console.log("Sound playing (attempted onload)");
+        })
+        .catch((error) => {
+          console.error("Playback failed (onload):", error);
+          if (error.name === "NotAllowedError") {
+            console.log("Autoplay blocked on load.");
+          }
+        });
+  
+
 }
-
-
-
