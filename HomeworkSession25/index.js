@@ -7,7 +7,6 @@ let correctPass = false;
 let audio = null;
 
 const encodedPass = "UGFzc3dvcmQxMSE=";
-const PASSWORD = atob(encodedPass);
 
 function tryPlaySound() {
   play("Sound.mp3");
@@ -70,29 +69,40 @@ const submitPassword = () => {
 function checkPass(pwd) {
   if (checkPassValid(pwd)) {
     if (TRY > 0) {
-      if (pwd === PASSWORD) {
+      if (pwd === atob(encodedPass)) {
         messageElement.textContent = "Correct Password!";
         messageElement.className = "message valid";
         correctPass = true;
         document.querySelector("button").disabled = true;
         passwordInput.disabled = true;
-        attemptsLeftElement.style.display="none"
-        stop()
-      } else {
+        attemptsLeftElement.style.display = "none";
+        stop();
+        return;
+      }
+
+      if (pwd !== atob(encodedPass)) {
+        console.log(TRY);
         messageElement.textContent = `Wrong password.`;
         messageElement.className = "message invalid";
         TRY--;
+        return;
       }
-    } else {
+    } 
+   
+    if(TRY == 0){
       messageElement.textContent = "You are locked out!";
       messageElement.className = "message invalid";
+      return
     }
-  } else {
+  } 
+
+  if (!checkPassValid(pwd)) {
     messageElement.textContent = "Password Not Valid";
     messageElement.className = "message invalid";
+    TRY--
+    return
   }
 }
-
 
 
 function play(nm) {
@@ -112,7 +122,6 @@ function play(nm) {
 }
 
 function stop(){
-  console.log("stop")
     audio.pause();
     audio.currentTime = 0; 
     audio = null;

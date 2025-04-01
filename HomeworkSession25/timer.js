@@ -13,12 +13,17 @@ function countdownTimerDisplay(seconds, elementId) {
     timeLeft--;
     timerDisplay.textContent = formatTime(timeLeft);
 
+    if(TRY == 0){
+      clearInterval(interval)
+    }
+
     if (timeLeft < 0) {
       clearInterval(interval);
+      attemptsLeftElement.textContent = "You are locked out!";
       timerDisplay.textContent = "Finished!";
-    }else if(correctPass){
-      clearInterval(interval)
-      timerDisplay.textContent = `00:${timeLeft}`
+    } else if (correctPass) {
+      clearInterval(interval);
+      timerDisplay.textContent = `00:${timeLeft}`;
     }
   }, 1000);
 }
@@ -33,7 +38,3 @@ function formatTime(totalSeconds) {
   const formattedSeconds = String(seconds).padStart(2, "0");
   return `${formattedMinutes}:${formattedSeconds}`;
 }
-
-
-
-
