@@ -53,6 +53,37 @@ function checkPassValid(pwd) {
   return hasTwoNumbers && hasSymbol && hasUpperCase;
 }
 
+
+function checkPass(pwd) {
+  if (!checkPassValid(pwd)) {
+    messageElement.textContent = "Password Not Valid";
+    messageElement.className = "message invalid";
+    TRY--;
+    return;
+  }
+
+  if (TRY <= 0) {
+    messageElement.textContent = "You are locked out!";
+    messageElement.className = "message invalid";
+    return;
+  }
+
+  if (pwd === atob(encodedPass)) {
+    messageElement.textContent = "Correct Password!";
+    messageElement.className = "message valid";
+    correctPass = true;
+    document.querySelector("button").disabled = true;
+    passwordInput.disabled = true;
+    attemptsLeftElement.style.display = "none";
+    stop();
+    return;
+  }
+
+  messageElement.textContent = `Wrong password.`;
+  messageElement.className = "message invalid";
+  TRY--;
+}
+
 const submitPassword = () => {
   const pwd = passwordInput.value;
   checkPass(pwd);
@@ -65,44 +96,6 @@ const submitPassword = () => {
   }
   passwordInput.value = "";
 };
-
-function checkPass(pwd) {
-  if (checkPassValid(pwd)) {
-    if (TRY > 0) {
-      if (pwd === atob(encodedPass)) {
-        messageElement.textContent = "Correct Password!";
-        messageElement.className = "message valid";
-        correctPass = true;
-        document.querySelector("button").disabled = true;
-        passwordInput.disabled = true;
-        attemptsLeftElement.style.display = "none";
-        stop();
-        return;
-      }
-
-      if (pwd !== atob(encodedPass)) {
-        console.log(TRY);
-        messageElement.textContent = `Wrong password.`;
-        messageElement.className = "message invalid";
-        TRY--;
-        return;
-      }
-    } 
-   
-    if(TRY == 0){
-      messageElement.textContent = "You are locked out!";
-      messageElement.className = "message invalid";
-      return
-    }
-  } 
-
-  if (!checkPassValid(pwd)) {
-    messageElement.textContent = "Password Not Valid";
-    messageElement.className = "message invalid";
-    TRY--
-    return
-  }
-}
 
 
 function play(nm) {
