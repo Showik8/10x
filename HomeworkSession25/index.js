@@ -17,12 +17,10 @@ function tryPlaySound() {
   countdownTimerDisplay(44, "timer");
 }
 
-
 let TRY = 3;
 const messageElement = document.getElementById("message");
 const attemptsLeftElement = document.getElementById("attemptsLeft");
 const passwordInput = document.getElementById("passwordInput");
-
 
 function checkPassValid(pwd) {
   const symbols = ["!", "@", "#", "$", "%", "&", "*", "."];
@@ -44,15 +42,14 @@ function checkPassValid(pwd) {
 
     if (hasNumberRegex.test(char)) {
       numberCount++;
-      if (numberCount >= 2) {
-        hasTwoNumbers = true;
-      }
+    }
+    if (numberCount >= 2) {
+      hasTwoNumbers = true;
     }
   }
   console.log("Validation:", hasTwoNumbers, hasSymbol, hasUpperCase);
   return hasTwoNumbers && hasSymbol && hasUpperCase;
 }
-
 
 function checkPass(pwd) {
   if (!checkPassValid(pwd)) {
@@ -97,25 +94,23 @@ const submitPassword = () => {
   passwordInput.value = "";
 };
 
-
 function play(nm) {
-   audio = new Audio(nm);
-    audio
-      .play()
-      .then(() => {
-        console.log("Sound playing (attempted onload)");
-      })
-      .catch((error) => {
-        console.error("Playback failed (onload):", error);
-        if (error.name === "NotAllowedError") {
-          console.log("Autoplay blocked on load.");
-        }
-      });
-  
+  audio = new Audio(nm);
+  audio
+    .play()
+    .then(() => {
+      console.log("Sound playing (attempted onload)");
+    })
+    .catch((error) => {
+      console.error("Playback failed (onload):", error);
+      if (error.name === "NotAllowedError") {
+        console.log("Autoplay blocked on load.");
+      }
+    });
 }
 
-function stop(){
-    audio.pause();
-    audio.currentTime = 0; 
-    audio = null;
+function stop() {
+  audio.pause();
+  audio.currentTime = 0;
+  audio = null;
 }
